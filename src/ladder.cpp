@@ -61,19 +61,32 @@ bool is_adjacent(const string& word1, const string& word2) {
     return edit_distance_within(word1, word2, 1);
 }
 
-// vector<string> generate_word_ladder(const string& begin_word, const string& end_word, 
-// const set<string>& word_list) {
-//     queue<vector<string>> ladder_q;
-//     ladder_q.push({begin_word});
-//     set<string> visited;
-//     visited.insert(begin_word);
+vector<string> generate_word_ladder(const string& begin_word, const string& end_word, 
+const set<string>& word_list) {
+    queue<vector<string>> ladder_q;
+    ladder_q.push({begin_word});
+    set<string> visited;
+    visited.insert(begin_word);
 
-//     while (!ladder_q.empty()) {
-//         vector<string> ladder = ladder_q.front();
-//         ladder_q.pop();
-//         string last_word = ladder.back();
-//     }
-// }
+    while (!ladder_q.empty()) {
+        vector<string> ladder = ladder_q.front();
+        ladder_q.pop();
+        string last_word = ladder.back();
+        for (const string & word : word_list) {
+            if (is_adjacent(last_word, word)) {
+                if (!visited.contains(word)) {
+                    visited.insert(word);
+                    vector<string> new_ladder = ladder;
+                    new_ladder.push_back(word);
+                    if (word == end_word) return new_ladder;
+                    ladder_q.push(new_ladder);
+                }
+            }
+        }
+    }
+    error(begin_word, end_word, "no ladder found");
+    return vector<string>();
+}
 
 void load_words(set<string> & word_list, const string& file_name) {
     ifstream file(file_name);
