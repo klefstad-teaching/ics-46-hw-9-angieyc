@@ -11,4 +11,11 @@ int main() {
     for (int i : shortest_path) {
         cout << i << " ";
     }
+    cout << endl;
+
+    vector<int> extraction = extract_shortest_path(shortest_path, previous, 5);
+    for (int i : extraction) {
+        cout << i << " ";
+    }
+    cout << endl;
 }

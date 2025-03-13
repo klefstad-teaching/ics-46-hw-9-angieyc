@@ -35,3 +35,33 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     }
     return distances;
 }
+
+vector<int> extract_shortest_path(const vector<int>& distances, const vector<int>& previous, int destination) {
+    vector<int> path;
+
+    // if destination unreachable, the value should be infinity
+    if (distances[destination] == INF) {
+        return path;
+    }
+
+    for (int i = destination; i != -1; i = previous[i]) {
+        path.push_back(i);
+    }
+
+    reverse(path.begin(), path.end());
+    return path;
+}
+
+void print_path(const vector<int>& v, int total) {
+    if (v.empty()) {
+        cout << "No path." << endl;
+        return;
+    }
+    
+    cout << "Shortest path: ";
+    for (int i : v) {
+        cout << i << " ";
+    }
+    cout << endl;
+    cout << "Total distance: " << total << endl;
+}
