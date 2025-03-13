@@ -33,6 +33,12 @@ struct Graph : public vector<vector<Edge>> {
     int numVertices=0;
 };
 
+struct pq_compare {
+    bool operator()(pair<int, int> a, pair<int, int> b) {
+        return a.second > b.second; // Min-heap based on weight
+    }
+};
+
 inline istream& operator>>(istream& in, Graph& G) {
     if (!(in >> G.numVertices))
         throw runtime_error("Unable to find input file");

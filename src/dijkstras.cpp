@@ -14,8 +14,8 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     vector<bool> visited(G.numVertices, false);
     distances[source] = 0;
     previous[source] = -1;
-    // pq for minimum cause default is max
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> min_heap; //pair <vertex, weight>
+    // pq_compare for minimum cause default is max
+    priority_queue<pair<int, int>, vector<pair<int, int>>, pq_compare> min_heap; //pair <vertex, weight>
     min_heap.push({source, 0});
 
     while(!min_heap.empty()) {
